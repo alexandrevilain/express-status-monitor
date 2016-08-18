@@ -57,16 +57,6 @@
       width: 400px;
       height: 100px;
     }
-
-    .footer {
-      position: fixed;
-      margin: auto;
-      text-align: center;
-      left: 0;
-      right: 0;
-      bottom: 0;
-    }
-
     .span-controls {
       float: right;
     }
@@ -124,9 +114,6 @@
       <canvas id="rpsChart" width="200" height="100"></canvas>
     </div>
   </div>
-  <div class="footer">
-    <p>Made with &#9829; with Socket.io & Chart.js</p>
-  </div>
 </div>
 <script>
   Chart.defaults.global.defaultFontSize = 8;
@@ -136,7 +123,7 @@
   Chart.defaults.global.elements.line.borderColor = "rgba(0,0,0,0.9)";
   Chart.defaults.global.elements.line.borderWidth = 2;
 
-  var socket = io(location.protocol + '//' + location.hostname + ':' + location.port);
+  var socket = io('{{protocol}}//' + location.hostname + ':{{port}}');
   var defaultSpan = 0;
   var spans = [];
 

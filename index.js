@@ -6,10 +6,14 @@
   const os = require('os');
   const onHeaders = require('on-headers');
   const pidusage = require('pidusage');
+  const handlebars = require('handlebars');
   let io;
 
   const defaultConfig = {
     path: '/status',
+    protocol: "https",
+    socketPort: "41338", // socket.io will listen at this port
+    proxyPassPort: "444", // The view will launch socket.io at this port
     spans: [{
       interval: 1,
       retention: 60
@@ -72,13 +76,25 @@
       config.path = defaultConfig.path;
     }
 
+    if (config.protocol === undefined || !config instanceof Array) {
+      config.protocol = defaultConfig.protocol;
+    }
+
+    if (config.socketPort === undefined || !config instanceof Array) {
+      config.socketPort = defaultConfig.socketPort;
+    }
+
+    if (config.proxyPassPort === undefined || !config instanceof Array) {
+      config.proxyPassPort = defaultConfig.proxyPassPort;
+    }
+
     if (config.spans === undefined || !config instanceof Array) {
       config.spans = defaultConfig.spans;
     }
 
     return (req, res, next) => {
       if (io === null || io === undefined) {
-        
+
         io = require('socket.io')(req.socket.server);
 
         io.on('connection', (socket) => {
@@ -95,7 +111,16 @@
 
       const startTime = process.hrtime();
       if (req.path === config.path) {
-        res.sendFile(path.join(__dirname + '/index.html'));
+        var data = {
+          protocol: config.protocol,
+          port: config.proxyPassPort
+        }
+        fs.readFile(path.join(__dirname, 'template', 'index.html'), 'utf-8', function(error, source){
+          var template = handlebars.compile(source);
+          var html = template(data);
+          res.send(data);
+        });
+
       } else {
         onHeaders(res, () => {
           const diff = process.hrtime(startTime);

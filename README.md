@@ -1,4 +1,5 @@
-### Issues with HTTPS (including Heroku) has been resolved, module is working again
+# This fork :
+Uses express-status-monitor, but add option for proxypass and add handlebars template engine
 # express-status-monitor
 Simple, self-hosted module based on Socket.io and Chart.js to report realtime server metrics for Express-based node servers. More Node frameworks coming soon.
 
@@ -6,14 +7,14 @@ Simple, self-hosted module based on Socket.io and Chart.js to report realtime se
 
 ## Installation & setup
 1. Run `npm install express-status-monitor --save`
-2. Before any other middleware or router add following line: 
+2. Before any other middleware or router add following line:
 `app.use(require('express-status-monitor')());`
 3. Run server and to go `/status`
 
 ## Options
 
 Monitor can be configured by passing options object into `expressMonitor` constructor.
- 
+
 Default config:
 ```
 path: '/status',

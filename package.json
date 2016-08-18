@@ -13,6 +13,7 @@
   "author": "Rafal Wilinski raf.wilinski@gmail.com",
   "license": "MIT",
   "dependencies": {
+    "handlebars": "^4.0.5",
     "on-headers": "^1.0.1",
     "pidusage": "^1.0.4",
     "socket.io": "^1.4.8"
