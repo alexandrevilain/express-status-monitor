@@ -115,7 +115,7 @@
           protocol: config.protocol,
           port: config.proxyPassPort
         }
-        fs.readFile(path.join(__dirname, 'template', 'index.html'), 'utf-8', function(error, source){
+        fs.readFile(path.join(__dirname, 'template', 'index.hbs'), 'utf-8', function(error, source){
           var template = handlebars.compile(source);
           var html = template(data);
           res.send(data);
