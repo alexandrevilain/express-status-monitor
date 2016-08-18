@@ -95,7 +95,7 @@
     return (req, res, next) => {
       if (io === null || io === undefined) {
 
-        io = require('socket.io')(req.socket.server);
+        io = require('socket.io')(config.socketPort);
 
         io.on('connection', (socket) => {
           socket.emit('start', config.spans);
