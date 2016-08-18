@@ -118,7 +118,7 @@
         fs.readFile(path.join(__dirname, 'template', 'index.hbs'), 'utf-8', function(error, source){
           var template = handlebars.compile(source);
           var html = template(data);
-          res.send(data);
+          res.send(html);
         });
 
       } else {
