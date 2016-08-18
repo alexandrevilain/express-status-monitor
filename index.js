@@ -96,6 +96,7 @@
       if (io === null || io === undefined) {
 
         io = require('socket.io')(config.socketPort);
+        io.set( 'origins', '*l' );
 
         io.on('connection', (socket) => {
           socket.emit('start', config.spans);
